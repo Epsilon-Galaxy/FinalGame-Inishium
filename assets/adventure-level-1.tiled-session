@@ -1,0 +1,55 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "adventure-level-1-map.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "C:/Users/avnvi/OneDrive/Documents/GitHub/platformer/CMPM120-Platformer-Implementation/assets/levelOneMap.tmx": {
+            "scale": 0.5038851351351351,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1580.7173985920217,
+                "y": 221.28059001005693
+            }
+        },
+        "C:/Users/avnvi/OneDrive/Documents/GitHub/platformer/CMPM120-Platformer-Implementation/assets/levelOneMap.tmx#onebittilemap_packed": {
+            "scaleInDock": 1
+        },
+        "adventure-level-1-map.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 751.3333333333333,
+                "y": 391.33333333333326
+            }
+        },
+        "adventure-level-1-map.tmx#kenny-monochrome-pirates": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/avnvi/OneDrive/Documents/GitHub/FinalGameProject120CMPM/FinalGame-Inishium/assets",
+    "last.imagePath": "C:/Users/avnvi/OneDrive/Pictures/Assets/Kenny-Monochrome-RPG/Monochrome/Tilemap",
+    "map.height": 50,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 148,
+    "openFiles": [
+        "adventure-level-1-map.tmx"
+    ],
+    "project": "adventure-level-1.tiled-project",
+    "recentFiles": [
+        "adventure-level-1-map.tmx",
+        "C:/Users/avnvi/OneDrive/Documents/GitHub/platformer/CMPM120-Platformer-Implementation/assets/levelOneMap.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

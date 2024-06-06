@@ -7,8 +7,13 @@ class Load extends Phaser.Scene{
         this.load.setPath("./assets/");
 
         //Load Tilemap
-
+        this.load.image("kenny_monochromeRPG_packed", "rpg_tilemap_packed.png");
+        this.load.tilemapTiledJSON("levelOneMap", "adventure-level-1-map.json");
         //Load Tilemap as Spritesheet
+        this.load.spritesheet("rpg_tilemap_sheet", "rpg_tilemap_packed.png", {
+            frameWidth: 16,
+            frameHeight: 16
+        });
 
         //Load Particles as a multiatlas
 

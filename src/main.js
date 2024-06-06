@@ -28,12 +28,12 @@ let config = {
         }
     },
     width: 1440,
-    height: 900,
+    height: 800,
     scene: [Load, Adventure]
 }
 
 var cursors;
 const SCALE = 2.0;
-var my = {sprite: {}, text: {}, vfx {}};
+var my = {sprite: {}, text: {}, vfx: {}};
 
 const game = new Phaser.Game(config);
