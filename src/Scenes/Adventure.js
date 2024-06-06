@@ -32,6 +32,20 @@ class Adventure extends Phaser.Scene{
 
         cursors = this.input.keyboard.createCursorKeys();
         this.rKey = this.input.keyboard.addKey('R');
+
+
+        this.input.on('pointerdown', function (pointer)
+        {
+
+            console.log('Pointer x: ', pointer.x);
+            console.log('Pointer y: ', pointer.y);
+            my.sprite.projectile = this.physics.add.sprite(my.sprite.player.x, my.sprite.player.y, "rpg_tilemap_sheet", 126);
+            
+            //use world X to move towards definite position due to the use of the camera
+            this.physics.moveTo(my.sprite.projectile, pointer.worldX, pointer.worldY, 300);
+
+
+        }, this);
     }
 
     update(){
