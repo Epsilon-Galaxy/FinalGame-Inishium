@@ -9,6 +9,8 @@ class Adventure extends Phaser.Scene{
 
         this.VELOCITY = 200;
 
+        my.sprite.projectile = [];
+
     }
 
     create(){
@@ -22,6 +24,21 @@ class Adventure extends Phaser.Scene{
         my.sprite.player = this.physics.add.sprite(100, 100, "rpg_tilemap_sheet", 119);
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         my.sprite.player.setCollideWorldBounds(true);
+
+
+        // Create OBJECTS from OBJECT LAYER
+
+        // OBJECT TREES
+        this.tree = this.map.createFromObjects("Terrain", {
+            name: "tree",
+            key: "rpg_tilemap_sheet",
+            frame: 13
+        })
+        this.physics.world.enable(this.tree, Phaser.Physics.Arcade.STATIC_BODY);
+        this.treeGroup = this.add.group(this.tree);
+
+        this.projGroup = this.add.group(my.sprite.projectile);
+        console.log(this.projGroup);
 
 
         // Create CAMERA 
@@ -39,10 +56,32 @@ class Adventure extends Phaser.Scene{
 
             console.log('Pointer x: ', pointer.x);
             console.log('Pointer y: ', pointer.y);
-            my.sprite.projectile = this.physics.add.sprite(my.sprite.player.x, my.sprite.player.y, "rpg_tilemap_sheet", 126);
+            this.projectile = this.physics.add.sprite(my.sprite.player.x, my.sprite.player.y, "rpg_tilemap_sheet", 126)
+            my.sprite.projectile.push(this.projectile);
             
             //use world X to move towards definite position due to the use of the camera
-            this.physics.moveTo(my.sprite.projectile, pointer.worldX, pointer.worldY, 300);
+            this.physics.moveTo(this.projectile, pointer.worldX, pointer.worldY, 300);
+
+            console.log(my.sprite.projectile.length);   
+            this.projGroup = this.add.group(my.sprite.projectile);
+
+            this.physics.add.overlap(this.projGroup, this.treeGroup, (obj1, obj2) =>{
+                /*
+                this.add.particles(obj2.x, obj2.y, "kenny-particles", {
+                    frame: ["slash_01.png", "slash_02.png", "slash_03.png", "slash_04.png"],
+                    random: true,
+                    scale: {start: 0.5, end: 0.05},
+                    maxAliveParticles: 3,
+                    lifespan: 300,
+                    duration: 300
+                });
+                */
+                obj1.visible = false;
+                obj1.destroy();
+                console.log("yo");
+                //this.sound.play("deathSound");
+            })
+  
 
 
         }, this);
@@ -74,6 +113,8 @@ class Adventure extends Phaser.Scene{
 
             my.sprite.player.setVelocityY(0);
         }
+
+        my.sprite.projectile = my.sprite.projectile.filter((projectile) => (projectile.x > 0 && projectile.x < this.map.widthInPixels && projectile.y > 0 && projectile.y < this.map.widthInPixels && projectile.visible == true));
     }
 
 }

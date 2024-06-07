@@ -43,6 +43,7 @@
         "adventure-level-1-map.tmx"
     ],
     "project": "adventure-level-1.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "adventure-level-1-map.tmx",
         "C:/Users/avnvi/OneDrive/Documents/GitHub/platformer/CMPM120-Platformer-Implementation/assets/levelOneMap.tmx"
