@@ -11,6 +11,11 @@ class Adventure extends Phaser.Scene{
 
         my.sprite.projectile = [];
 
+        this.spawnTimer = 60;
+        this.spawnCounter = 0;
+
+        my.sprite.enemies = [];
+
     }
 
     create(){
@@ -27,6 +32,16 @@ class Adventure extends Phaser.Scene{
 
 
         // Create OBJECTS from OBJECT LAYER
+
+        // OBJECT SPAWNERS
+        this.spawner = this.map.createFromObjects("Terrain", {
+            name: "spawner",
+            key: "rpg_tilemap_sheet",
+            frame: 52
+        })
+        this.spawnerGroup = this.add.group(this.spawner);
+        console.log(this.spawner);
+        console.log(this.spawnerGroup);
 
         // OBJECT TREES
         this.tree = this.map.createFromObjects("Terrain", {
@@ -88,6 +103,25 @@ class Adventure extends Phaser.Scene{
     }
 
     update(){
+        this.spawnCounter++;
+        this.enemyFollows();
+        if(this.spawnCounter >= this.spawnTimer){
+
+            this.spawnCounter = 0;
+            
+            for(let i = 0; i < this.spawner.length; i++){
+                this.enemy = this.physics.add.sprite(this.spawner[i].x, this.spawner[i].y, "rpg_tilemap_sheet", 123);
+                console.log("Spawned enemy at: ", this.spawner[i].x, " ", this.spawner[i].y)
+                my.sprite.enemies.push(this.enemy);
+            }
+
+            this.enemyGroup = this.add.group(my.sprite.enemies);
+
+
+
+        }
+
+
         if(cursors.left.isDown) {
             my.sprite.player.setVelocityX(-this.VELOCITY);
             my.sprite.player.setFlip(true, false);
@@ -114,7 +148,15 @@ class Adventure extends Phaser.Scene{
             my.sprite.player.setVelocityY(0);
         }
 
+        my.sprite.enemies = my.sprite.enemies.filter((enemy) => (enemy.visible == true));
         my.sprite.projectile = my.sprite.projectile.filter((projectile) => (projectile.x > 0 && projectile.x < this.map.widthInPixels && projectile.y > 0 && projectile.y < this.map.widthInPixels && projectile.visible == true));
     }
+
+    enemyFollows() {
+        for(let i = 0; i < my.sprite.enemies.length; i++){
+            this.physics.moveToObject(my.sprite.enemies[i], my.sprite.player, 100);
+        }
+    }
+
 
 }

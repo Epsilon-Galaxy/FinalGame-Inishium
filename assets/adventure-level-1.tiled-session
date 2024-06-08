@@ -8,6 +8,9 @@
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "": {
+            "scaleInEditor": 4
+        },
         "C:/Users/avnvi/OneDrive/Documents/GitHub/platformer/CMPM120-Platformer-Implementation/assets/levelOneMap.tmx": {
             "scale": 0.5038851351351351,
             "selectedLayer": 0,
@@ -21,14 +24,14 @@
         },
         "adventure-level-1-map.tmx": {
             "scale": 0.75,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 751.3333333333333,
-                "y": 391.33333333333326
+                "x": 541.9999999999999,
+                "y": 373.99999999999994
             }
         },
         "adventure-level-1-map.tmx#kenny-monochrome-pirates": {
-            "scaleInDock": 1
+            "scaleInDock": 2
         }
     },
     "last.exportedFilePath": "C:/Users/avnvi/OneDrive/Documents/GitHub/FinalGameProject120CMPM/FinalGame-Inishium/assets",
