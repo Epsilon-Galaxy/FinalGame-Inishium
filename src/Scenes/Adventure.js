@@ -8,13 +8,17 @@ class Adventure extends Phaser.Scene{
         // this adds gravity this.physics.world.gravity.y = 100;
 
         this.VELOCITY = 200;
+        this.score = 0;
 
         my.sprite.projectile = [];
 
         this.spawnTimer = 60;
         this.spawnCounter = 0;
 
+        this.health = 100;
+
         my.sprite.enemies = [];
+        this.enemyGroup = this.add.group(my.sprite.enemies);
 
     }
 
@@ -23,6 +27,7 @@ class Adventure extends Phaser.Scene{
         this.tileset = this.map.addTilesetImage("kenny-monochrome-pirates", "kenny_monochromeRPG_packed");
 
         this.groundLayer = this.map.createLayer("Ground", this.tileset, 0, 0);
+
 
 
 
@@ -51,6 +56,7 @@ class Adventure extends Phaser.Scene{
         })
         this.physics.world.enable(this.tree, Phaser.Physics.Arcade.STATIC_BODY);
         this.treeGroup = this.add.group(this.tree);
+        this.physics.add.collider(my.sprite.player, this.treeGroup);
 
         this.projGroup = this.add.group(my.sprite.projectile);
         console.log(this.projGroup);
@@ -104,7 +110,54 @@ class Adventure extends Phaser.Scene{
 
     update(){
         this.spawnCounter++;
-        this.enemyFollows();
+
+        this.physics.add.overlap(this.projGroup, this.enemyGroup, (obj1, obj2) =>{
+            /*
+            this.add.particles(obj2.x, obj2.y, "kenny-particles", {
+                frame: ["slash_01.png", "slash_02.png", "slash_03.png", "slash_04.png"],
+                random: true,
+                scale: {start: 0.5, end: 0.05},
+                maxAliveParticles: 3,
+                lifespan: 300,
+                duration: 300
+            });
+            */
+            obj1.visible = false;
+            obj1.destroy();
+            obj2.visible = false;
+            obj2.destroy();
+
+            this.score += 100;
+
+            console.log(this.score);
+            //this.sound.play("deathSound");
+        })
+
+        this.physics.add.overlap(my.sprite.player, this.enemyGroup, (obj1, obj2) =>{
+            /*
+            this.add.particles(obj2.x, obj2.y, "kenny-particles", {
+                frame: ["slash_01.png", "slash_02.png", "slash_03.png", "slash_04.png"],
+                random: true,
+                scale: {start: 0.5, end: 0.05},
+                maxAliveParticles: 3,
+                lifespan: 300,
+                duration: 300
+            });
+            */
+
+            obj2.visible = false;
+            obj2.destroy();
+
+
+            this.health -= 10;
+
+            if (this.health <= 0){
+                console.log("GAME OVER");
+            }
+
+            //this.sound.play("deathSound");
+        })
+
         if(this.spawnCounter >= this.spawnTimer){
 
             this.spawnCounter = 0;
@@ -149,6 +202,7 @@ class Adventure extends Phaser.Scene{
         }
 
         my.sprite.enemies = my.sprite.enemies.filter((enemy) => (enemy.visible == true));
+        this.enemyFollows();
         my.sprite.projectile = my.sprite.projectile.filter((projectile) => (projectile.x > 0 && projectile.x < this.map.widthInPixels && projectile.y > 0 && projectile.y < this.map.widthInPixels && projectile.visible == true));
     }
 
