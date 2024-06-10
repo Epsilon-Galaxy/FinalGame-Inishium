@@ -18,7 +18,7 @@ class Load extends Phaser.Scene{
         //Load Particles as a multiatlas
 
         //Load bitmapfont
-
+        this.load.bitmapFont("KennyPixel", "KennyPixelFont_0.png", "KennyPixelFont.fnt");
         //Load sounds
 
 
@@ -41,6 +41,6 @@ class Load extends Phaser.Scene{
 
 
         //Start the adventure
-        this.scene.start("adventureScene")
+        this.scene.start("startScene")
     }
 }

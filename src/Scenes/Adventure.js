@@ -23,6 +23,9 @@ class Adventure extends Phaser.Scene{
     }
 
     create(){
+
+
+
         this.map = this.add.tilemap("levelOneMap", 16, 16, 148, 25);
         this.tileset = this.map.addTilesetImage("kenny-monochrome-pirates", "kenny_monochromeRPG_packed");
 
@@ -65,7 +68,7 @@ class Adventure extends Phaser.Scene{
         // Create CAMERA 
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(my.sprite.player, true, 0.25, 0.25);
-        this.cameras.main.setDeadzone(50, 70);
+        this.cameras.main.setDeadzone(0, 0);
         this.cameras.main.setZoom(this.SCALE);
 
         cursors = this.input.keyboard.createCursorKeys();
@@ -106,9 +109,34 @@ class Adventure extends Phaser.Scene{
 
 
         }, this);
+
+
+        this.scoreText = this.add.bitmapText(my.sprite.player.x - 100, my.sprite.player.y + 200,"KennyPixel",  "SCORE: 0", 32);
     }
 
     update(){
+
+        if(my.sprite.player.x < 325){
+            this.scoreText.x = 10;
+        }
+        else if(my.sprite.player.x > 2000){
+            this.scoreText.x = 2000 - 325;
+        }
+        else{
+            this.scoreText.x = my.sprite.player.body.x - 325;
+        }
+
+        if(my.sprite.player.y < 175){
+            this.scoreText.y = 10;
+        }
+        else if(my.sprite.player.y > 650){
+            this.scoreText.y = 650 - 250;
+        }
+        else{
+            this.scoreText.y = my.sprite.player.body.y - 175;
+        }
+        this.scoreText.setText("SCORE: " + this.score);
+
         this.spawnCounter++;
 
         this.physics.add.overlap(this.projGroup, this.enemyGroup, (obj1, obj2) =>{
@@ -124,13 +152,20 @@ class Adventure extends Phaser.Scene{
             */
             obj1.visible = false;
             obj1.destroy();
-            obj2.visible = false;
-            obj2.destroy();
 
-            this.score += 100;
+            obj2.healthAmount -= 1;
+            if(obj2.healthAmount <= 0){
+                obj2.visible = false;
+                obj2.destroy();
+    
+                this.score += 100;
+    
+                console.log(this.score);
+                //this.sound.play("deathSound");
+            }
 
-            console.log(this.score);
-            //this.sound.play("deathSound");
+
+
         })
 
         this.physics.add.overlap(my.sprite.player, this.enemyGroup, (obj1, obj2) =>{
@@ -164,7 +199,9 @@ class Adventure extends Phaser.Scene{
             
             for(let i = 0; i < this.spawner.length; i++){
                 this.enemy = this.physics.add.sprite(this.spawner[i].x, this.spawner[i].y, "rpg_tilemap_sheet", 123);
+                this.enemy.healthAmount = 2;
                 console.log("Spawned enemy at: ", this.spawner[i].x, " ", this.spawner[i].y)
+                console.log("Enemy Health: " + this.enemy.healthAmount);
                 my.sprite.enemies.push(this.enemy);
             }
 
