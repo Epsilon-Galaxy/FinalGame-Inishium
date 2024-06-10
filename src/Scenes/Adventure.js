@@ -112,30 +112,41 @@ class Adventure extends Phaser.Scene{
 
 
         this.scoreText = this.add.bitmapText(my.sprite.player.x - 100, my.sprite.player.y + 200,"KennyPixel",  "SCORE: 0", 32);
+        this.healthText = this.add.bitmapText(my.sprite.player.x + 100, my.sprite.player.y + 200, "KennyPixel", "HEALTH: 100", 32);
     }
 
     update(){
+        if(this.health <= 0){
+            this.scene.start("gameOverScene");
+        }
 
         if(my.sprite.player.x < 325){
             this.scoreText.x = 10;
+            this.healthText.x = 550;
         }
         else if(my.sprite.player.x > 2000){
             this.scoreText.x = 2000 - 325;
+            this.healthText.x = 2200;
         }
         else{
             this.scoreText.x = my.sprite.player.body.x - 325;
+            this.healthText.x = my.sprite.player.body.x + 200;
         }
 
         if(my.sprite.player.y < 175){
             this.scoreText.y = 10;
+            this.healthText.y = 10;
         }
         else if(my.sprite.player.y > 650){
             this.scoreText.y = 650 - 250;
+            this.healthText.y = 650 - 250;
         }
         else{
             this.scoreText.y = my.sprite.player.body.y - 175;
+            this.healthText.y = my.sprite.player.body.y - 175;
         }
         this.scoreText.setText("SCORE: " + this.score);
+        this.healthText.setText("HEALTH: " + this.health);
 
         this.spawnCounter++;
 
