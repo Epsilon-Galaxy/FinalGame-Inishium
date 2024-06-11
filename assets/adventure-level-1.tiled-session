@@ -23,15 +23,15 @@
             "scaleInDock": 1
         },
         "adventure-level-1-map.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "scale": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 541.9999999999999,
-                "y": 373.99999999999994
+                "x": 104.375,
+                "y": 282.125
             }
         },
         "adventure-level-1-map.tmx#kenny-monochrome-pirates": {
-            "scaleInDock": 2
+            "scaleInDock": 3
         }
     },
     "last.exportedFilePath": "C:/Users/avnvi/OneDrive/Documents/GitHub/FinalGameProject120CMPM/FinalGame-Inishium/assets",
