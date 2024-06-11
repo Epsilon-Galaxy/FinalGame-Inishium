@@ -1,13 +1,13 @@
-class Adventure extends Phaser.Scene{
+class LevelTwo extends Phaser.Scene{
     constructor(){
-        super("adventureScene");
+        super("levelTwoScene");
     }
 
-    init() {
+    init(){
         this.SCALE = 2.0;
 
         this.VELOCITY = 200;
-        this.MAX_ENEMIES = 30;
+        this.MAX_ENEMIES = 20;
         this.score = 0;
 
         this.nextStage = false;
@@ -23,8 +23,8 @@ class Adventure extends Phaser.Scene{
 
         my.sprite.enemies = [];
         this.enemyGroup = this.add.group(my.sprite.enemies);
-
     }
+
 
     create(){
 
@@ -260,6 +260,7 @@ class Adventure extends Phaser.Scene{
             }
 
             this.enemyGroup = this.add.group(my.sprite.enemies);
+            this.enemyFollows();
 
 
 
@@ -293,13 +294,14 @@ class Adventure extends Phaser.Scene{
         }
 
         my.sprite.enemies = my.sprite.enemies.filter((enemy) => (enemy.visible == true));
-        this.enemyFollows();
+
         my.sprite.projectile = my.sprite.projectile.filter((projectile) => (projectile.x > 0 && projectile.x < this.map.widthInPixels && projectile.y > 0 && projectile.y < this.map.widthInPixels && projectile.visible == true));
     }
 
     enemyFollows() {
+        my.sprite.enemies = my.sprite.enemies.filter((enemy) => (enemy.visible == true));
         for(let i = 0; i < my.sprite.enemies.length; i++){
-            this.physics.moveToObject(my.sprite.enemies[i], my.sprite.player, 100);
+            this.physics.moveToObject(my.sprite.enemies[i], my.sprite.player, 300);
         }
     }
 

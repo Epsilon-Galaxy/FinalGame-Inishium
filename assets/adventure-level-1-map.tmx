@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="148" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="19">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="148" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="25">
  <editorsettings>
   <export target="adventure-level-1-map.json" format="json"/>
  </editorsettings>
@@ -151,5 +151,11 @@
   <object id="16" name="tree" gid="14" x="192" y="208" width="16" height="16"/>
   <object id="17" name="spawner" gid="53" x="832" y="272" width="16" height="16"/>
   <object id="18" name="spawner" gid="53" x="832" y="384" width="16" height="16"/>
+  <object id="19" name="path" gid="88" x="0" y="288" width="16" height="16"/>
+  <object id="20" name="path" gid="88" x="16" y="288" width="16" height="16"/>
+  <object id="21" name="path" gid="88" x="16" y="304" width="16" height="16"/>
+  <object id="22" name="path" gid="88" x="0" y="304" width="16" height="16"/>
+  <object id="23" name="path" gid="88" x="32" y="304" width="16" height="16"/>
+  <object id="24" name="path" gid="88" x="32" y="288" width="16" height="16"/>
  </objectgroup>
 </map>
