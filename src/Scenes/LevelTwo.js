@@ -255,7 +255,7 @@ class LevelTwo extends Phaser.Scene{
             
             for(let i = 0; i < this.spawner.length; i++){
                 if(my.sprite.enemies.length <= this.MAX_ENEMIES){
-                    this.enemy = this.physics.add.sprite(this.spawner[i].x, this.spawner[i].y, "rpg_tilemap_sheet", 123);
+                    this.enemy = this.physics.add.sprite(this.spawner[i].x, this.spawner[i].y, "rpg_tilemap_sheet", 125);
                     this.enemy.healthAmount = 2;
                     console.log("Spawned enemy at: ", this.spawner[i].x, " ", this.spawner[i].y)
                     console.log("Enemy Health: " + this.enemy.healthAmount);
