@@ -26,6 +26,16 @@ class BossBattle extends Phaser.Scene{
 
         this.projectileTimer = 50;
         this.projectileCounter = 0;
+
+        this.invulnrable = false;
+        this.invunrableTimer = 100;
+        this.invunrableCounter = 0;
+
+        this.bossStunTimer = 150;
+        this.bossStunCounter = 0;
+
+        this.bossMoveTimer = 75;
+        this.bossMoveCounter = 0;
     }
 
 
@@ -60,6 +70,12 @@ class BossBattle extends Phaser.Scene{
         this.spawnerGroup = this.add.group(this.spawner);
         console.log(this.spawner);
         console.log(this.spawnerGroup);
+
+        this.bossSpawner = this.map.createFromObjects("Terrain", {
+            name: "bossSpawner",
+            key: "rpg_tilemap_sheet",
+            frame: 69
+        })
 
         // OBJECT TREES
         this.tree = this.map.createFromObjects("Terrain", {
@@ -98,6 +114,26 @@ class BossBattle extends Phaser.Scene{
 
         this.projGroup = this.add.group(my.sprite.projectile);
         console.log(this.projGroup);
+
+        my.sprite.boss = this.physics.add.sprite(this.bossSpawner[0].x, this.bossSpawner[0].y, "rpg_tilemap_sheet", 123);
+        my.sprite.boss.health = 1;
+        my.sprite.boss.stunned = false;
+        my.sprite.boss.setCollideWorldBounds(true);
+        my.sprite.boss.setScale(3);
+
+        this.physics.add.overlap(my.sprite.player, my.sprite.boss, (obj1, obj2) =>{
+            if(this.invulnrable == false){
+                this.health -= 50;
+                this.invulnrable = true;
+                obj2.stunned = true;
+            }
+            if(this.invulnrable == true){
+                obj2.stunned = true;
+
+            }
+        })
+
+
 
 
         // Create CAMERA 
@@ -140,6 +176,18 @@ class BossBattle extends Phaser.Scene{
                 console.log("yo");
                 //this.sound.play("deathSound");
             })
+
+            this.physics.add.overlap(this.projGroup, my.sprite.boss, (obj1, obj2) =>{
+            
+
+                obj1.visible = false;
+                obj1.destroy();
+    
+                obj2.health -= 1;
+                if(obj2.health <= 0){
+                    this.scene.start("finalGameScene");
+                }
+            })
   
 
 
@@ -151,6 +199,35 @@ class BossBattle extends Phaser.Scene{
     }
 
     update(){
+        this.bossMoveCounter += 1;
+        if(this.bossMoveCounter >= this.bossMoveTimer){
+            console.log("boss is currently " + my.sprite.boss.stunned);
+            if(my.sprite.boss.stunned == true){
+                my.sprite.boss.setVelocityX(0);
+                my.sprite.boss.setVelocityY(0);
+
+                this.bossStunCounter += 1;
+                if(this.bossStunCounter >= this.bossStunTimer){
+                    this.bossStunCounter = 0;
+                    my.sprite.boss.stunned = false;
+                }
+            }
+            else{
+                this.physics.moveToObject(my.sprite.boss, my.sprite.player, 500);
+                this.bossMoveCounter = 0;
+            }
+
+        }
+
+        if(this.invulnrable == true){
+            this.invunrableCounter += 1;
+            if(this.invunrableCounter >= this.invunrableTimer){
+                this.invulnrable = false;
+                this.invunrableCounter = 0;
+            }
+        }
+
+
         this.projectileCounter++;
         if(this.projectileCounter >= this.projectileTimer){
             this.enemyShoots();

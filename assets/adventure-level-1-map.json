@@ -392,6 +392,18 @@
                  "width":16,
                  "x":32,
                  "y":288
+                }, 
+                {
+                 "gid":70,
+                 "height":16,
+                 "id":25,
+                 "name":"bossSpawner",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":576,
+                 "y":336
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -400,7 +412,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":25,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
