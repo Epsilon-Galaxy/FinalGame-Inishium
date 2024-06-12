@@ -87,7 +87,8 @@ class LevelTwo extends Phaser.Scene{
                 this.nextStageText.y = my.sprite.player.y + 100;
             }
             else{
-                this.scene.start("levelTwoScene");
+                console.log("Loading Boss Battle");
+                this.scene.start("bossBattleScene");
             }
             //this.sound.play("deathSound");
         })

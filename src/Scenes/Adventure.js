@@ -87,6 +87,7 @@ class Adventure extends Phaser.Scene{
                 this.nextStageText.y = my.sprite.player.y + 100;
             }
             else{
+                console.log("Loading Level Two");
                 this.scene.start("levelTwoScene");
             }
             //this.sound.play("deathSound");
