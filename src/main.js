@@ -29,7 +29,7 @@ let config = {
     },
     width: 1440,
     height: 800,
-    scene: [Load, Adventure, StartMenu, GameOver, LevelTwo]
+    scene: [Load, Adventure, StartMenu, GameOver, LevelTwo, BossBattle]
 }
 
 var cursors;
