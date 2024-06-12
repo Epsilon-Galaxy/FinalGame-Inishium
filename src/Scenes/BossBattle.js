@@ -23,6 +23,9 @@ class BossBattle extends Phaser.Scene{
 
         my.sprite.enemies = [];
         this.enemyGroup = this.add.group(my.sprite.enemies);
+
+        this.projectileTimer = 50;
+        this.projectileCounter = 0;
     }
 
 
@@ -148,6 +151,12 @@ class BossBattle extends Phaser.Scene{
     }
 
     update(){
+        this.projectileCounter++;
+        if(this.projectileCounter >= this.projectileTimer){
+            this.enemyShoots();
+            this.projectileCounter = 0;
+        }
+
         if(this.nextStage == true){
             this.nextStageText.visible = true;
             this.nextStageTimer++;
@@ -297,6 +306,7 @@ class BossBattle extends Phaser.Scene{
         my.sprite.enemies = my.sprite.enemies.filter((enemy) => (enemy.visible == true));
         this.enemyFollows();
         my.sprite.projectile = my.sprite.projectile.filter((projectile) => (projectile.x > 0 && projectile.x < this.map.widthInPixels && projectile.y > 0 && projectile.y < this.map.widthInPixels && projectile.visible == true));
+        my.sprite.enemyProjectile = my.sprite.enemyProjectile.filter((projectile) => (projectile.x > 0 && projectile.x < this.map.widthInPixels && projectile.y > 0 && projectile.y < this.map.widthInPixels && projectile.visible == true));
     }
 
     enemyFollows() {
@@ -307,8 +317,69 @@ class BossBattle extends Phaser.Scene{
     }
 
     enemyShoots(){
-
+        my.sprite.enemies = my.sprite.enemies.filter((enemy) => (enemy.visible == true));
+        for(let i = 0; i < my.sprite.enemies.length; i++){
+            if(this.getRandomInt(10) < 5){
+                console.log("firing enemy Projectile");
+                this.enemyProjectile = this.physics.add.sprite(my.sprite.enemies[i].x, my.sprite.enemies[i].y, "rpg_tilemap_sheet", 126)
+                my.sprite.enemyProjectile.push(this.enemyProjectile);
+                
+                //use world X to move towards definite position due to the use of the camera
+                this.physics.moveTo(this.enemyProjectile, my.sprite.player.x, my.sprite.player.y, 400);
+       
+                this.enemProjGroup = this.add.group(my.sprite.enemyProjectile);
+    
+                this.physics.add.overlap(this.enemProjGroup, this.treeGroup, (obj1, obj2) =>{
+                    /*
+                    this.add.particles(obj2.x, obj2.y, "kenny-particles", {
+                        frame: ["slash_01.png", "slash_02.png", "slash_03.png", "slash_04.png"],
+                        random: true,
+                        scale: {start: 0.5, end: 0.05},
+                        maxAliveParticles: 3,
+                        lifespan: 300,
+                        duration: 300
+                    });
+                    */
+                    obj1.visible = false;
+                    obj1.destroy();
+                    console.log("yo");
+                    //this.sound.play("deathSound");
+                })
+    
+                this.physics.add.overlap(my.sprite.player, this.enemProjGroup, (obj1, obj2) =>{
+                    /*
+                    this.add.particles(obj2.x, obj2.y, "kenny-particles", {
+                        frame: ["slash_01.png", "slash_02.png", "slash_03.png", "slash_04.png"],
+                        random: true,
+                        scale: {start: 0.5, end: 0.05},
+                        maxAliveParticles: 3,
+                        lifespan: 300,
+                        duration: 300
+                    });
+                    */
+        
+                    obj2.visible = false;
+                    obj2.destroy();
+        
+        
+                    this.health -= 20;
+        
+                    if (this.health <= 0){
+                        console.log("GAME OVER");
+                    }
+        
+                    //this.sound.play("deathSound");
+                })
+            }
+            console.log("Not firing");
+            
+  
+        }
     }
+
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
 
 
 }
