@@ -39,6 +39,18 @@ class Load extends Phaser.Scene{
         })
         */
 
+        this.anims.create({
+            key: "health",
+            defaultTextureKey: "rpg_tilemap_sheet",
+            frames: [
+                { frame: 127},
+                { frame: 128},
+                { frame: 129}
+            ],
+            frameRate: 5,
+            repeat: -1
+        })
+
 
         //Start the adventure
         this.scene.start("startScene")

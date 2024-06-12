@@ -31,11 +31,13 @@ class BossBattle extends Phaser.Scene{
         this.invunrableTimer = 100;
         this.invunrableCounter = 0;
 
-        this.bossStunTimer = 150;
+        this.bossStunTimer = 75;
         this.bossStunCounter = 0;
 
         this.bossMoveTimer = 75;
         this.bossMoveCounter = 0;
+
+        my.sprite.pickups = [];
     }
 
 
@@ -295,6 +297,7 @@ class BossBattle extends Phaser.Scene{
             obj2.healthAmount -= 1;
             if(obj2.healthAmount <= 0){
                 obj2.visible = false;
+                this.healthDrop(obj2);
                 obj2.destroy();
     
                 this.score += 100;
@@ -451,6 +454,27 @@ class BossBattle extends Phaser.Scene{
             console.log("Not firing");
             
   
+        }
+    }
+
+    healthDrop(enemy){
+        if(this.getRandomInt(10) < 2){
+            this.pickup = this.physics.add.sprite(enemy.x, enemy.y, "rpg_tilemap_sheet", 127)
+            this.pickup.setScale(0.8);
+            this.pickup.anims.play("health");
+            my.sprite.pickups.push(this.pickup);
+            this.pickupGroup = my.sprite.pickups;
+
+            this.physics.add.overlap(my.sprite.player, this.pickupGroup, (obj1, obj2) =>{
+
+                obj2.visible = false
+                my.sprite.pickups = my.sprite.pickups.filter((pick) => (pick.visible == true));
+                this.pickupGroup = my.sprite.pickups;
+                obj2.destroy();
+
+                this.health += 5
+            })
+            
         }
     }
 
