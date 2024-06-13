@@ -60,7 +60,7 @@ class LevelTwo extends Phaser.Scene{
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         my.sprite.player.setCollideWorldBounds(true);
 
-        this.nextStageText = this.add.bitmapText(my.sprite.player.x - 350, my.sprite.player.y + 100, "KennyPixel", "Collect 3000 points and find the exit to go to the next stage", 30);
+        this.nextStageText = this.add.bitmapText(my.sprite.player.x - 350, my.sprite.player.y + 100, "KennyPixel", "Collect 1000 points and find the exit to go to the next stage", 30);
         this.nextStage = true;
 
 
@@ -94,10 +94,10 @@ class LevelTwo extends Phaser.Scene{
 
         this.physics.add.overlap(my.sprite.player, this.pathGroup, (obj1, obj2) =>{
 
-            if(this.score < 3000){
+            if(this.score < 1000){
                 this.nextStage = true;
                 this.nextStageText.visible = true;
-                this.nextStageText.setText("This is the exit collect 3000 points to move on");
+                this.nextStageText.setText("This is the exit collect 1000 points to move on");
                 this.nextStageText.x = my.sprite.player.x;
                 this.nextStageText.y = my.sprite.player.y + 100;
             }
