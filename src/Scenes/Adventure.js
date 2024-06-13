@@ -152,6 +152,9 @@ class Adventure extends Phaser.Scene{
 
         this.scoreText = this.add.bitmapText(my.sprite.player.x - 100, my.sprite.player.y + 200,"KennyPixel",  "SCORE: 0", 32);
         this.healthText = this.add.bitmapText(my.sprite.player.x + 100, my.sprite.player.y + 200, "KennyPixel", "HEALTH: 100", 32);
+
+        this.physics.world.drawDebug = this.physics.world.drawDebug ? false : true
+        this.physics.world.debugGraphic.clear()
     }
 
     update(){

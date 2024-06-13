@@ -12,7 +12,7 @@ class StartMenu extends Phaser.Scene{
           .setInteractive({ useHandCursor: true })
           .on('pointerup', () => {
             this.sound.play("click");
-            this.scene.start("bossBattleScene");
+            this.scene.start("adventureScene");
         });
 
         this.goal = this.add.bitmapText(250, 600, "KennyPixel", "score points and find the exit to move on", 64);
