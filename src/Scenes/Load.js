@@ -16,10 +16,19 @@ class Load extends Phaser.Scene{
         });
 
         //Load Particles as a multiatlas
+        this.load.multiatlas("kenny-particles", "kenny-particles.json");
 
         //Load bitmapfont
         this.load.bitmapFont("KennyPixel", "KennyPixelFont_0.png", "KennyPixelFont.fnt");
         //Load sounds
+        this.load.audio("projectile", "projectileshot.ogg");
+        this.load.audio("footstep", "footstep00.ogg");
+        this.load.audio("click", "uiclick.ogg");
+        this.load.audio("hit", "hitEffect.ogg");
+        this.load.audio("heal", "health.ogg");
+        this.load.audio("lose", "youLose.ogg");
+        this.load.audio("win", "youwin.ogg");
+        this.load.audio("nextLevel", "nextLevel.ogg");
 
 
     }
